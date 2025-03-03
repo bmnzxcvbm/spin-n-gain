@@ -63,12 +63,17 @@ const Roulette: React.FC<RouletteProps> = ({
     const winnerIndex = Math.floor(normalizedAngle / optionAngle);
     const winningOption = options[options.length - 1 - winnerIndex];
     
-    // Set the wheel's CSS variable for spin duration
+    // Set the wheel's CSS variables for spin duration and angle
     if (wheelRef.current) {
       wheelRef.current.style.setProperty('--spin-duration', `${spinDuration}s`);
+      wheelRef.current.style.setProperty('--spin-angle', `${spinAngle}deg`);
+      
+      // Force a reflow before adding the spinning class
+      void wheelRef.current.offsetWidth;
+      wheelRef.current.classList.add('spinning');
     }
     
-    // Set new rotation angle
+    // Set new rotation angle for after animation completes
     setRotation(spinAngle);
     
     // Wait for spin to complete
@@ -76,6 +81,13 @@ const Roulette: React.FC<RouletteProps> = ({
       setIsSpinning(false);
       setWinner(winningOption);
       onSpinComplete(winningOption);
+      
+      // Remove spinning class
+      if (wheelRef.current) {
+        wheelRef.current.classList.remove('spinning');
+        // Set the final rotation directly
+        wheelRef.current.style.transform = `rotate(${spinAngle}deg)`;
+      }
       
       // Stop spin sound, play win sound
       stopSound('spin');
@@ -148,7 +160,7 @@ const Roulette: React.FC<RouletteProps> = ({
         <div 
           ref={wheelRef}
           className={`roulette-wheel absolute inset-5 rounded-full border-4 border-primary/30 overflow-hidden 
-                      shadow-2xl transition-transform ${isSpinning ? 'spinning' : ''}`}
+                      shadow-2xl transition-transform`}
           style={{ transform: `rotate(${rotation}deg)` }}
         >
           {/* Options */}
