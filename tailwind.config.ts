@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -160,6 +159,11 @@ export default {
 				'spin-roulette': 'spin-roulette var(--spin-duration, 5s) cubic-bezier(0.2, 0.8, 0.2, 1) forwards',
 				'bounce-subtle': 'bounce-subtle 2s ease-in-out infinite',
 				'float': 'float 3s ease-in-out infinite'
+			},
+			utilities: {
+				'.backface-visibility-hidden': {
+					'backface-visibility': 'hidden'
+				}
 			}
 		}
 	},
