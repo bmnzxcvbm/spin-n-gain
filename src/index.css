@@ -128,23 +128,22 @@
 }
 
 .option-item {
-  @apply absolute w-full h-full flex items-center justify-center 
-         transition-all duration-300 ease-in-out transform-gpu backface-visibility-hidden
-         text-center px-4 text-sm font-medium;
+  @apply absolute w-full h-full transition-all duration-300 ease-in-out transform-gpu backface-visibility-hidden;
   transform-origin: center;
+  clip-path: polygon(50% 50%, 50% 0, 100% 0, 100% 100%, 50% 100%);
 }
 
 .option-text {
   position: absolute;
   top: 0;
-  left: 0;
-  right: 0;
+  left: 50%;
+  width: 50%;
   height: 50%;
+  transform-origin: left bottom;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
-  transform-origin: bottom center;
-  padding: 0 10px;
+  padding: 0.5rem;
   text-align: center;
 }
 

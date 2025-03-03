@@ -41,6 +41,7 @@ const Roulette: React.FC<RouletteProps> = ({
 
   const getTextStyle = (index: number, total: number) => {
     const angle = (360 / total) * index;
+    // Calculate the rotation needed to make text upright in each segment
     return {
       transform: `rotate(${-angle}deg)`,
     };
